@@ -1,22 +1,38 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, ScrollView } from 'react-native';
+import { AppLoader } from '../components/AppLoader';
+import { Table } from './../components/Table';
 
-export const RecentSearchesScreen = ({}) => {
-  return (
-    <View style={styles.center}>
-      <Text>Recent Searches</Text>
-    </View>
-  );
-};
+
+
+export const RecentSearchesScreen = () => {
+  const [recievedData, setRecievedData] = useState(null)
+
+  useEffect(() => {
+    fetch('https://weather-app-289621.firebaseio.com/query.json', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(res => res.json())
+      .then(data => setRecievedData(data))
+  }, [])
+
+
+  return recievedData ? (
+    <ScrollView style={styles.container}>
+      <Table data={[Object.keys(recievedData).map(key => recievedData[key])][0]} />
+    </ScrollView>
+  ) 
+  : <AppLoader />
+}
 
 RecentSearchesScreen.navigationOptions = {
   headerTitle: 'Recent Searches'
 }
 
 const styles = StyleSheet.create({
-  center: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    paddingTop: 22
   }
-})
+});

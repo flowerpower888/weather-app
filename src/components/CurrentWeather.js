@@ -1,30 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 
-const API_KEY = 'c859829031daf97ef9a2cda84f8d35f2'
 
-export const CurrentWeather = ({ coords }) => {
-    const [weatherData, setWeatherData] = useState(null)
+export const CurrentWeather = ({ temp, iconCode }) => {
 
-    useEffect(() => {
-        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.latitude}&lon=${coords.longitude}&appid=${API_KEY}&units=metric`)
-            .then(res => res.json())
-            .then(data => {
-                setWeatherData(data.current)
-            })
-    }, [])
-
-    return weatherData ? (
+    return (
         <View style={styles.container}>
-            <Text>{weatherData.temp}°C </Text>
+            <Text>{temp}</Text>
             <Image
                 style={styles.logo}
                 source={{
-                    uri: `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`,
+                    uri: `http://openweathermap.org/img/wn/${iconCode}@2x.png`,
                 }}
             />
         </View>
-    ) : null;
+    )
 }
 
 const styles = StyleSheet.create({

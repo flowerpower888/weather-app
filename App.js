@@ -6,7 +6,6 @@ import { AppNavigation } from './src/navigation/AppNavigation'
 
 export default function App() {
   const [isReady, setIsReady] = useState(false)
-
   if (!isReady) {
     return (
       <AppLoading
