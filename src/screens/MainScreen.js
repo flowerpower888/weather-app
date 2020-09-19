@@ -4,9 +4,7 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { AppLoader } from '../components/AppLoader';
 import { WeatherCard } from '../components/WeatherCard';
-
-const WEATHER_API_KEY = 'c859829031daf97ef9a2cda84f8d35f2'
-const COORDS_API_KEY = 'pk.eyJ1IjoiZmx2dnJwdnZyIiwiYSI6ImNrZjRtM3BjMTBlaXoyem1kM3NlZ2Q5czQifQ.0sHYMvC_j9tjOqO8_5ua9Q'
+import { REACT_NATIVE_COORDS_API_KEY, REACT_NATIVE_WEATHER_API_KEY } from "@env"
 
 
 export const MainScreen = () => {
@@ -16,7 +14,7 @@ export const MainScreen = () => {
   const [errorMsg, setErrorMsg] = useState(null);
 
   const getWeather = (coords) => {
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.latitude}&lon=${coords.longitude}&appid=${WEATHER_API_KEY}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.latitude}&lon=${coords.longitude}&appid=${REACT_NATIVE_WEATHER_API_KEY}&units=metric`)
       .then(res => res.json())
       .then(data => {
         const query = {
@@ -42,7 +40,7 @@ export const MainScreen = () => {
   }
 
   const getLocation = (coords) => {
-    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.longitude},${coords.latitude}.json?access_token=${COORDS_API_KEY}`)
+    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.longitude},${coords.latitude}.json?access_token=${REACT_NATIVE_COORDS_API_KEY}`)
       .then(res => res.json())
       .then(data => {
         setLocation(data.features[0].place_name)
