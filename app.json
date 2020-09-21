@@ -28,7 +28,7 @@
       "package": "com.flvvrpvvr.rn_weather_app",
       "versionCode": 1,
       "permissions": [
-        "ACCESS_COARSE_LOCATION"
+        "ACCESS_FINE_LOCATION"
       ]
     }
   }
