@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import { REACT_NATIVE_COORDS_API_KEY, REACT_NATIVE_WEATHER_API_KEY } from "@env"
 import { AppLoader } from '../components/AppLoader';
 import { WeatherCard } from '../components/WeatherCard';
-import { REACT_NATIVE_COORDS_API_KEY, REACT_NATIVE_WEATHER_API_KEY } from "@env"
 
 
 export const MainScreen = () => {
@@ -50,8 +50,8 @@ export const MainScreen = () => {
 
   useEffect(() => {
     Permissions.askAsync(Permissions.LOCATION)
-      .then(status => {
-        if (status !== 'granted') {
+      .then(data => {
+        if (data.status !== 'granted') {
           setErrorMsg('Permission to access location was denied')
         }
       })
@@ -64,12 +64,19 @@ export const MainScreen = () => {
   }, []);
 
   
-  return query ? (
+  return (
     <View style={styles.center}>
-      <Text style={styles.heading2}>Your location: </Text>
-      <WeatherCard coords={coords} location={location} temp={query.weather.temp} iconCode={query.weather.iconCode} />
+      {
+        errorMsg ? (<Text>{errorMsg}</Text>) :
+        query ? (
+          <View>
+              <Text style={styles.heading2}>Your location: </Text>
+              <WeatherCard coords={coords} location={location} temp={query.weather.temp} iconCode={query.weather.iconCode} />
+          </View>
+          ) : <AppLoader />
+      }
     </View>
-  ) : <AppLoader />
+  )
 };
 
 MainScreen.navigationOptions = {
@@ -84,6 +91,7 @@ const styles = StyleSheet.create({
   },
 
   heading2: {
+    textAlign: 'center',
     color: "#000",
     margin: 5,
     fontWeight: "bold",
