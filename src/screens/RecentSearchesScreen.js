@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { AppLoader } from '../components/AppLoader';
 import { Table } from './../components/Table';
-
 
 
 export const RecentSearchesScreen = () => {
