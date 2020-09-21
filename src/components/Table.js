@@ -54,7 +54,8 @@ export const Table = ({ data }) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 15,
+        paddingTop: 30,
+        paddingBottom: 30,
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
