@@ -6,10 +6,9 @@ import { Entypo } from '@expo/vector-icons';
 export const CurrentLocation = ({ coords, location }) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.heading1}>{coords ? `${coords.latitude},` : ""}</Text>
-            <Text style={styles.heading1}>{coords ? `${coords.longitude}` : ""}</Text>
-            <Entypo name="location" size={24} color="black" />
-            <Text>{location}</Text>
+            <Text style={styles.heading}>{coords.latitude + ","} {coords.longitude}</Text>
+            <Entypo style={styles.icon} name="location" size={45} color="black" />
+            <Text style={styles.centerText}>{location}</Text>
         </View>
     )
 }
@@ -20,10 +19,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    heading1: {
-        color: "#000",
+    centerText: {
+        textAlign: 'center'
+    },
+    heading: {
         fontWeight: "bold",
         fontSize: 30,
-        margin: 5
+        textAlign: 'center'
+    },
+    icon: {
+        padding: 20
     }
 });

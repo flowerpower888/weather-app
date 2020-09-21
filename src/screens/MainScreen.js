@@ -70,7 +70,7 @@ export const MainScreen = () => {
         errorMsg ? (<Text>{errorMsg}</Text>) :
         query ? (
           <View>
-              <Text style={styles.heading2}>Your location: </Text>
+              <Text style={styles.heading}>Your location: </Text>
               <WeatherCard coords={coords} location={location} temp={query.weather.temp} iconCode={query.weather.iconCode} />
           </View>
           ) : <AppLoader />
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  heading2: {
+  heading: {
     textAlign: 'center',
     color: "#000",
     margin: 5,

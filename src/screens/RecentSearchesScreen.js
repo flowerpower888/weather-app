@@ -19,7 +19,7 @@ export const RecentSearchesScreen = () => {
 
 
   return recievedData ? (
-    <ScrollView style={styles.container}>
+    <ScrollView>
       <Table data={[Object.keys(recievedData).map(key => recievedData[key])][0]} />
     </ScrollView>
   ) 
@@ -29,10 +29,3 @@ export const RecentSearchesScreen = () => {
 RecentSearchesScreen.navigationOptions = {
   headerTitle: 'Recent Searches'
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 22
-  }
-});
